@@ -1,0 +1,53 @@
+<html>
+	<head><title>Prime Number Calculator</title>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+		document.getElementById('generate').addEventListener('click', () => {
+			const input = document.getElementById('primeTill');
+			const n = parseInt(input.value, 10);
+			if (isNaN(n) || n < 2) {
+				alert('Please enter a value >=2');
+				return;
+			}
+			display_prime_till_n(n);
+		});
+
+
+
+		});
+
+		function is_prime(n) {
+			if (n < 2) return false;
+			for (let i = 2; i <= Math.sqrt(n); i++) if (n%i==0) return false;
+			return true;
+		}
+
+		function get_primes_till_n(n) {
+			const primesList = [];
+			for (let i=2; i<=n; i++) if (is_prime(i)) primesList.push(i)
+			return primesList;
+		}
+
+		function display_prime_till_n(n) {
+			const prime_list = get_primes_till_n(n);
+			const div = document.getElementById('primeList');
+			div.innerHTML = '';
+			prime_list.forEach(prime => {
+				const new_div = document.createElement('div');
+			        new_div.textContent = prime;
+				div.append(new_div);
+			});
+		
+		}
+
+	
+	</script>
+	</head>
+	<body>
+                <h3> Prime list</h3>
+		<input type="number" id="primeTill" min="2" placeholder="Enter a number" />
+		<button id="generate">Generate Primes Till Input</button>
+		<div id="primeList"></div>
+		
+	</body>
+</html>
